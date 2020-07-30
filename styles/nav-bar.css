@@ -1,0 +1,9 @@
+.nav-bar-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center
+}
+
+.nav-bar-container svg {
+    width: 50px;
+}

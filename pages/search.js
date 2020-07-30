@@ -7,6 +7,7 @@ const SearchResults = () => {
 
     return (
         <div>
+            {/* This will be replaced soon */}
             Hello! {q}
         </div>
     )

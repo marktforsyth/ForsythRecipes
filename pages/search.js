@@ -1,12 +1,12 @@
 import React from 'react'
 
 import NavBar from '../components/nav-bar'
-import SearchResultBtn from '../components/search-result-button'
+import RecipeBtn from '../components/recipe-button'
 
 import Recipes from '../data/recipes.json'
 
 const SearchResults = () => {
-    const pageUrl = window.location.href
+    const pageUrl = 'http://localhost:3000/search?q=Al'
     const queryIndex = pageUrl.indexOf('q=')
     const query = pageUrl.substring(queryIndex + 2).replace(/%20/g, ' ')
 
@@ -22,7 +22,7 @@ const SearchResults = () => {
         }
 
         return recipeTitlesThatMatch.map(recipeTitle => (
-            <SearchResultBtn key={'search_res_' + recipeTitle} result={recipeTitle} />
+            <RecipeBtn key={'search_res_' + recipeTitle} name={recipeTitle} />
         ))
     }
 

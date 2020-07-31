@@ -21,9 +21,7 @@ const RecipeCategoryDetail = () => {
                     {cname ? (
                         Categories[cname].recipeNames.map(recipeName => {
                             return (
-                                <div key={recipeName}>
-                                    <RecipeBtn name={recipeName} />
-                                </div>
+                                <RecipeBtn key={recipeName} name={recipeName} />
                             )
                         })
                     ) : null}

@@ -5,9 +5,11 @@ const RecipeBtn = (props) => {
     const router = useRouter()
 
     return (
-        <button onClick={() => {
-            router.push('/recipes/[rtitle]', `/recipes/${props.name}`)
-        }}>{props.name}</button>
+        <div className='recipe-btn'>
+            <button onClick={() => {
+                router.push('/recipes/[rtitle]', `/recipes/${props.name}`)
+            }}>{props.name}</button>
+        </div>
     )
 }
 

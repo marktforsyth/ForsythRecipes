@@ -11,6 +11,7 @@ const NavBar = (props) => {
     const checkForSubmit = (event) => {
         if (event.key === 'Enter') {            
             router.push('/search', `/search?q=${event.target.value}`)
+            console.log(router.key)
         }
     }
 

@@ -17,22 +17,26 @@ const NavBar = (props) => {
 
     return (
         <div className='nav-bar-container'>
-            <div>
-                <HomeIcon onClick={() => {
-                    router.push('/')
-                }} />
-                <AddRecipeIcon />
+            <div className='nav-bar'>
+                <div className='left-column'>
+                    <HomeIcon onClick={() => {
+                        router.push('/')
+                    }} />
+                    <AddRecipeIcon />
+                </div>
+
+                <div className='right-column'>
+                    <SearchIcon />
+                    <input
+                        type='text'
+                        placeholder='Search recipes...'
+                        onKeyDown={event => checkForSubmit(event)}
+                        defaultValue={props.defaultValue}
+                    />
+                </div>
             </div>
 
-            <div>
-                <SearchIcon />
-                <input
-                    type='text'
-                    placeholder='Search recipes...'
-                    onKeyDown={event => checkForSubmit(event)}
-                    defaultValue={props.defaultValue}
-                />
-            </div>
+            <div className='bottom-border-boundary'></div>
         </div>
     )
 }

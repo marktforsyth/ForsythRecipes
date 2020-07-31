@@ -1,9 +1,55 @@
+/* Main styles */
 .nav-bar-container {
     display: flex;
-    justify-content: space-evenly;
-    align-items: center
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.nav-bar-container > .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    padding-bottom: 20px;
+}
+
+.nav-bar-container > .bottom-border-boundary {
+    border-top: 2px dotted #bebebe;
+    width: 100%;
+}
+
+/* Right column styles */
+.nav-bar-container > .nav-bar > .right-column {
+    width: 50%;
+    border-bottom: 2px solid black;
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+}
+
+.nav-bar-container > .nav-bar > .right-column input {
+    font-family: 'Antic Slab', serif;
+    font-size: 2rem;
+    border: none;
+}
+
+.nav-bar-container > .nav-bar > .right-column input:focus,
+.nav-bar-container > .nav-bar > .right-column input:active {
+    outline: none;
+}
+
+.nav-bar-container > .nav-bar > .right-column svg {
+    margin-right: 12px;
+}
+
+/* Left column styles */
+.nav-bar-container > .nav-bar > .left-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 35px;
 }
 
 .nav-bar-container svg {
-    width: 50px;
+    width: 45px;
 }

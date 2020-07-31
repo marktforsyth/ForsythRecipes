@@ -1,14 +1,16 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 
-import NavBar from '../components/nav-bar'
 import RecipeBtn from '../components/recipe-button'
 
 import Recipes from '../data/recipes.json'
 
 const SearchResults = () => {
-    const pageUrl = 'http://localhost:3000/search?q=Al'
-    const queryIndex = pageUrl.indexOf('q=')
-    const query = pageUrl.substring(queryIndex + 2).replace(/%20/g, ' ')
+    const router = useRouter()
+
+    const pageUrl = router.asPath
+    const queryIndex = pageUrl.indexOf('?q=')
+    const query = pageUrl.substring(queryIndex + 3).replace(/%20/g, ' ')
 
     const findByRecipeTitle = () => {
         let recipeTitlesThatMatch = []
@@ -16,13 +18,15 @@ const SearchResults = () => {
         for (let r in Recipes) {
             let recipe = Recipes[r]
 
-            if (recipe.title.includes(query)) {
+            if (recipe.title.toUpperCase().includes(query.toUpperCase())) {
                 recipeTitlesThatMatch.push(recipe.title)
             }
         }
 
         return recipeTitlesThatMatch.map(recipeTitle => (
-            <RecipeBtn key={'search_res_' + recipeTitle} name={recipeTitle} />
+            <div key={'search_res_title_' + recipeTitle}>
+                <RecipeBtn name={recipeTitle} />
+            </div>
         ))
     }
 
@@ -37,12 +41,16 @@ const SearchResults = () => {
     return (
         <div>
                 <div>
-                    <NavBar defaultValue={query} />
+                    <div className='result-heading-container'>
+                        <h2 className='result-heading'>
+                            <i>Showing results for</i> <span>{query}</span>
+                        </h2>
+                    </div>
 
                     <h1>Recipes With Matching <i>Titles</i>:</h1>
-                    <pre>
+                    <div>
                         {findByRecipeTitle()}
-                    </pre>
+                    </div>
 
                     <h1>Recipes With Matching <i>Bodies</i>:</h1>
 

@@ -1,8 +1,11 @@
 import Head from 'next/head'
 
+import NavBar from '../components/nav-bar'
+
 import '../styles/globals.css'
 import '../styles/page-container.css'
 import '../styles/nav-bar.css'
+import '../styles/search-results.css'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,7 +14,13 @@ function MyApp({ Component, pageProps }) {
             <title>Forsyth Recipes</title>
         </Head>
 
-        <Component {...pageProps} />
+        <NavBar />
+
+        <div className='page-container'>
+          <div className='column'>
+            <Component {...pageProps} />
+          </div>
+        </div>
     </div>
   )
 }

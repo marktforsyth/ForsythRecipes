@@ -1,32 +1,33 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
 import NavBar from '../components/nav-bar'
+import SearchResultBtn from '../components/search-result-button'
 
 import Recipes from '../data/recipes.json'
 
 const SearchResults = () => {
-    const router = useRouter()
-    const q = router.asPath.substring(10).replace(/&20/g, ' ')
+    const pageUrl = window.location.href
+    const queryIndex = pageUrl.indexOf('q=')
+    const query = pageUrl.substring(queryIndex + 2).replace(/%20/g, ' ')
 
     const findByRecipeTitle = () => {
         let recipeTitlesThatMatch = []
-        console.log(typeof q)
         
         for (let r in Recipes) {
             let recipe = Recipes[r]
-            console.log(recipe.title)
 
-            if (recipe && recipe.title.includes(q)) {
-                recipeTitlesThatMatch.push(recipe.title + '\n')
+            if (recipe.title.includes(query)) {
+                recipeTitlesThatMatch.push(recipe.title)
             }
         }
 
-        return recipeTitlesThatMatch
+        return recipeTitlesThatMatch.map(recipeTitle => (
+            <SearchResultBtn key={'search_res_' + recipeTitle} result={recipeTitle} />
+        ))
     }
 
     const findByRecipeBody = () => {
-
+        // Note: if a recipe matches in titles, don't match it in bodies (so no repeats)
     }
 
     const findByCategoryName = () => {
@@ -36,16 +37,16 @@ const SearchResults = () => {
     return (
         <div>
                 <div>
-                    <NavBar defaultValue={q} />
+                    <NavBar defaultValue={query} />
 
-                    <h1>Matching Recipe Titles:</h1>
+                    <h1>Recipes With Matching <i>Titles</i>:</h1>
                     <pre>
                         {findByRecipeTitle()}
                     </pre>
 
-                    <h1>Matching Recipe Bodies:</h1>
+                    <h1>Recipes With Matching <i>Bodies</i>:</h1>
 
-                    <h1>Matching Categories:</h1>
+                    <h1>Categories That Match:</h1>
                 </div>
         </div>
     )

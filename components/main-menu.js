@@ -5,15 +5,15 @@ import RecipeCategoryBtn from './recipe-category-button'
 import Categories from '../data/categories.json'
 
 const MainMenu = () => {
-    let categoryTitles = Object.keys(Categories)
+    let categoryNames = Object.keys(Categories)
 
     return(
         <div>
-            {categoryTitles.map(categoryTitle => {
+            {categoryNames.map(categoryName => {
                     return (
                         <RecipeCategoryBtn
-                            name={categoryTitle}
-                            key={categoryTitle}
+                            name={categoryName}
+                            key={categoryName}
                         />
                     )
                 })}

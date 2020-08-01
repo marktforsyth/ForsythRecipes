@@ -1,0 +1,61 @@
+.menu-title {
+    font-size: 2.6em;
+}
+
+.menu-title::before {
+    content: "\00bb";
+}
+
+.category-btns-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40px;
+    margin-top: 50px;
+}
+
+.category-btns-container div > .category-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.category-btns-container div > .category-btn:hover img {
+    -webkit-box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.19);
+    -moz-box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.19);
+    box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.19);
+}
+
+.category-btns-container div > .category-btn:hover > .category-text {
+    color: black; /* placeholder -- will likely change color, or just leave out this effect */
+}
+
+.category-btns-container div > .category-btn img {
+    width: 100%;
+    transition: 0.5s ease-in-out;
+}
+
+.category-btns-container div > .category-btn > .category-text {
+    font-size: 2.3em;
+    font-weight: bold;
+    font-family: 'EB Garamond', serif;
+    transition: 0.5s ease-in-out;
+}
+
+.recipe-btn {
+    border: 1px solid white;
+    border-left: 2px solid white;
+    padding: 12px 12px 12px 30px;
+    font-size: 1.06rem;
+    transition: 0.5s ease border-left-color;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.recipe-btn:hover {
+    border-left: 2px solid black;
+}

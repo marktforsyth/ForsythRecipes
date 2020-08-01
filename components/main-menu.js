@@ -9,7 +9,10 @@ const MainMenu = () => {
 
     return(
         <div>
-            {categoryNames.map(categoryName => {
+            <h1 className='menu-title' >Main Categories</h1>
+
+            <div className='category-btns-container'>
+                {categoryNames.map(categoryName => {
                     return (
                         <RecipeCategoryBtn
                             name={categoryName}
@@ -17,6 +20,7 @@ const MainMenu = () => {
                         />
                     )
                 })}
+            </div>
         </div>
     )
 }

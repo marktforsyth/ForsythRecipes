@@ -11,7 +11,7 @@
     display: flex;
     justify-content: space-between;
     width: 85%;
-    padding-bottom: 20px;
+    padding-bottom: 25px;
 }
 
 .nav-bar-container > .bottom-border-boundary {
@@ -50,6 +50,7 @@
     grid-gap: 35px;
 }
 
+/* Image styles */
 .nav-bar-container svg {
     width: 45px;
 }

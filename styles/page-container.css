@@ -23,3 +23,13 @@ pre {
 h1 {
   font-family: 'EB Garamond', serif;
 }
+
+button {
+  background-color: transparent;
+  font-family: inherit;
+  font-weight: 300;
+}
+
+button:focus, button:active {
+  outline: none;
+}

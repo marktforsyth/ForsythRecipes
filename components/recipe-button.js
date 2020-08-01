@@ -5,10 +5,13 @@ const RecipeBtn = (props) => {
     const router = useRouter()
 
     return (
-        <div className='recipe-btn'>
-            <button onClick={() => {
-                router.push('/recipes/[rtitle]', `/recipes/${props.name}`)
-            }}>{props.name}</button>
+        <div>
+            <button
+                className='recipe-btn'
+                onClick={() => {
+                    router.push('/recipes/[rtitle]', `/recipes/${props.name}`)
+                }
+            }>{props.name}</button>
         </div>
     )
 }

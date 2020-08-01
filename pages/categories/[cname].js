@@ -11,7 +11,7 @@ const RecipeCategoryDetail = () => {
 
     return (
         <div>
-            <h1>{cname}</h1>
+            <h1 className='menu-title' >{cname}</h1>
 
             {cname ? (
                 Categories[cname].recipeNames.map(recipeName => {

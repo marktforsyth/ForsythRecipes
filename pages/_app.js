@@ -6,6 +6,7 @@ import '../styles/globals.css'
 import '../styles/page-container.css'
 import '../styles/nav-bar.css'
 import '../styles/search-results.css'
+import '../styles/menu.css'
 
 function MyApp({ Component, pageProps }) {
   return (

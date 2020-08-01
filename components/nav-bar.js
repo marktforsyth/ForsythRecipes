@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import SearchIcon from '../images/search.svg'
-import HomeIcon from '../images/home.svg'
-import AddRecipeIcon from '../images/add-recipe.svg'
+import SearchIcon from '../public/images/nav-bar/search.svg'
+import HomeIcon from '../public/images/nav-bar/home.svg'
+import AddRecipeIcon from '../public/images/nav-bar/add-recipe.svg'
 
 const NavBar = (props) => {
     const router = useRouter()
 
     const checkForSubmit = (event) => {
-        if (event.key === 'Enter') {            
+        if (event.key === 'Enter' && event.target.value !== '') {            
             router.push('/search', `/search?q=${event.target.value}`)
-            
         }
     }
+
+    useEffect(() => {
+        
+    })
 
     return (
         <div className='nav-bar-container'>
@@ -40,7 +43,5 @@ const NavBar = (props) => {
         </div>
     )
 }
-
-
 
 export default NavBar

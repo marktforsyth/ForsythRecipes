@@ -38,8 +38,6 @@ const NavBar = (props) => {
                     />
                 </div>
             </div>
-
-            <div className='bottom-border-boundary'></div>
         </div>
     )
 }

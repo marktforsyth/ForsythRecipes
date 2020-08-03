@@ -1,5 +1,3 @@
-import Head from 'next/head'
-
 import NavBar from '../components/nav-bar'
 
 import '../styles/globals.css'
@@ -11,10 +9,6 @@ import '../styles/menu.css'
 function MyApp({ Component, pageProps }) {
   return (
     <div>
-        <Head>
-            <title>Forsyth Recipes</title>
-        </Head>
-
         <NavBar />
 
         <div className='page-container'>

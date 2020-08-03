@@ -1,3 +1,4 @@
+/* Main container styles */
 .page-container {
   display: flex;
   justify-content: center;
@@ -9,6 +10,7 @@
   width: 50%;
 }
 
+/* Specific element styles */
 pre {
   font-family: inherit;
   overflow-x: auto;

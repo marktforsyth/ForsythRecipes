@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 import RecipeBtn from '../../components/recipe-button'
 
@@ -11,12 +12,16 @@ const RecipeCategoryDetail = () => {
 
     return (
         <div>
+            <NextSeo
+                title={cname + ' - Forsyth Recipes'}
+            />
+
             <h1 className='menu-title' >{cname}</h1>
 
             {cname ? (
-                Categories[cname].recipeNames.map(recipeName => {
+                Categories[cname].recipeTitles.map(recipeTitle => {
                     return (
-                        <RecipeBtn key={recipeName} name={recipeName} />
+                        <RecipeBtn key={recipeTitle} name={recipeTitle} />
                     )
                 })
             ) : null}

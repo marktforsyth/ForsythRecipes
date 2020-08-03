@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 import Recipes from '../../data/recipes.json'
 
@@ -7,15 +8,21 @@ const RecipeDetail = () => {
     const router = useRouter()
     const { rtitle } = router.query
 
+    console.log(Recipes['Baked Eggs with Spinach and Mushrooms'])
+
     return(
         <div>
+            <NextSeo
+                title={rtitle + ' - Forsyth Recipes'}
+            />
+
             <h1>{rtitle}</h1>
 
             {rtitle ? (
                 <div>
                     <pre>{Recipes[rtitle].body}</pre>
 
-                    <br></br> {/* <-- Temporary */}
+                    <br></br>
                     <p>Created by: {Recipes[rtitle].creator}</p>
                     <p>Created on: {Recipes[rtitle].created}</p>
                     {Recipes[rtitle].modified ? (

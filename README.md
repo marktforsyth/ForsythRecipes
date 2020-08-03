@@ -1,2 +1,2 @@
 ## Forsyth Recipes
-A recipe database made by the Forsyth Family.
+A recipe database by the Forsyth Family.

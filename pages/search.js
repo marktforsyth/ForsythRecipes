@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import { NextSeo } from 'next-seo'
 
 import RecipeBtn from '../components/recipe-button'
 
@@ -32,6 +33,13 @@ const SearchResults = () => {
 
     const findByRecipeBody = () => {
         // Note: if a recipe matches in titles, don't match it in bodies (so no repeats)
+        /* e.g.
+            if (recipeTitlesThatMatch.includes(catTitleThatMatches)) {
+                don't bother
+            }
+        */
+
+        // Better to use state? Or just declare recipeTitlesThatMatch on SearchResult()'s scope?
     }
 
     const findByCategoryName = () => {
@@ -40,22 +48,26 @@ const SearchResults = () => {
 
     return (
         <div>
-                <div>
-                    <div className='result-heading-container'>
-                        <h2 className='result-heading'>
-                            <i>Showing results for</i> <span>{query}</span>
-                        </h2>
-                    </div>
-
-                    <h1>Recipes With Matching <i>Titles</i>:</h1>
-                    <div>
-                        {findByRecipeTitle()}
-                    </div>
-
-                    <h1>Recipes With Matching <i>Bodies</i>:</h1>
-
-                    <h1>Categories That Match:</h1>
+            <NextSeo
+                title={'Search results: ' + query + ' - Forsyth Recipes'}
+            />
+            
+            <div>
+                <div className='result-heading-container'>
+                    <h2 className='result-heading'>
+                        <i>Showing results for</i> <span>{query}</span>
+                    </h2>
                 </div>
+
+                <h1>Recipes With Matching <i>Titles</i>:</h1>
+                <div>
+                    {findByRecipeTitle()}
+                </div>
+
+                <h1>Recipes With Matching <i>Content</i>:</h1>
+
+                <h1>Categories That Match:</h1>
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { NextSeo } from 'next-seo'
 
@@ -8,7 +8,7 @@ const RecipeDetail = () => {
     const router = useRouter()
     const { rtitle } = router.query
 
-    console.log(Recipes['Baked Eggs with Spinach and Mushrooms'])
+    
 
     return(
         <div>

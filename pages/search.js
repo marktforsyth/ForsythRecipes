@@ -1,17 +1,29 @@
-import React from 'react'
-import { useRouter } from 'next/router'
+import React, { useEffect } from 'react'
 import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
 
 import RecipeBtn from '../components/recipe-button'
+import { clearSearchbar, query } from '../components/nav-bar'
 
 import Recipes from '../data/recipes.json'
 
 const SearchResults = () => {
-    const router = useRouter()
+    // const pageUrl = 'http://localhost:3000/search?q=chicken'
+    // const queryIndex = pageUrl.indexOf('?q=')
+    // const query = pageUrl.substring(queryIndex + 3).replace(/%20/g, ' ')
 
-    const pageUrl = router.asPath
-    const queryIndex = pageUrl.indexOf('?q=')
-    const query = pageUrl.substring(queryIndex + 3).replace(/%20/g, ' ')
+    const router = useRouter()
+    useEffect(() => {
+        const handleRouteChange = url => {
+            clearSearchbar()
+        }
+
+        router.events.on('routeChangeStart', handleRouteChange)
+
+        return () => {
+            router.events.off('routeChangeStart', handleRouteChange)
+        }
+    }, [])
 
     const findByRecipeTitle = () => {
         let recipeTitlesThatMatch = []
@@ -52,22 +64,20 @@ const SearchResults = () => {
                 title={'Search results: ' + query + ' - Forsyth Recipes'}
             />
             
-            <div>
-                <div className='result-heading-container'>
-                    <h2 className='result-heading'>
-                        <i>Showing results for</i> <span>{query}</span>
-                    </h2>
-                </div>
-
-                <h1>Recipes With Matching <i>Titles</i>:</h1>
-                <div>
-                    {findByRecipeTitle()}
-                </div>
-
-                <h1>Recipes With Matching <i>Content</i>:</h1>
-
-                <h1>Categories That Match:</h1>
+            <div className='result-heading-container'>
+                <h2 className='result-heading'>
+                    <i>Showing results for</i> <span>{query}</span>
+                </h2>
             </div>
+
+            <h1>Recipes With Matching <i>Titles</i>:</h1>
+            <div>
+                {findByRecipeTitle()}
+            </div>
+
+            <h1>Recipes With Matching <i>Content</i>:</h1>
+
+            <h1>Categories That Match:</h1>
         </div>
     )
 }

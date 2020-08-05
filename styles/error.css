@@ -1,0 +1,36 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 102px);
+    font-family: "Antic Slab", serif;
+}
+
+.error-container > .error-heading {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.error-container > .error-msg {
+    font-size: 2em;
+}
+
+.error-container > .return-home {
+    border: 1px solid white;
+    font-size: 1.5em;
+    color: blue;
+    margin-top: 25px;
+    transition: 0.5 ease-in-out;
+    cursor: pointer;
+}
+
+.error-container > .return-home::before {
+    content: '\219E';
+}
+
+.error-container > .return-home:hover {
+    color: darkblue;
+}

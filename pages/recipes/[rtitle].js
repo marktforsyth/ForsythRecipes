@@ -1,5 +1,5 @@
 import React from 'react'
-import Error from 'next/error'
+import Error from '../../pages/_error'
 import { NextSeo } from 'next-seo'
 
 import Recipes from '../../data/recipes.json'

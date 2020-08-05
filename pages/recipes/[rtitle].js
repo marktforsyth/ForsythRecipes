@@ -1,12 +1,12 @@
 import React from 'react'
-import Error from '../../pages/_error'
+import Custom404 from '../../pages/404'
 import { NextSeo } from 'next-seo'
 
 import Recipes from '../../data/recipes.json'
 
-const RecipeDetail = ({ rtitle, statusCode }) => {
-    if (statusCode === 404) {
-        return <Error statusCode={statusCode} />
+const RecipeDetail = ({ rtitle, recipeExists }) => {
+    if (!recipeExists) {
+        return <Custom404 />
     }
 
     if (!rtitle) {
@@ -35,17 +35,13 @@ const RecipeDetail = ({ rtitle, statusCode }) => {
     )
 }
 
-RecipeDetail.getInitialProps = async ({ query, res }) => {
+RecipeDetail.getInitialProps = async ({ query }) => {
     const { rtitle } = query
     const recipeExists = Object.keys(Recipes).includes(rtitle)
 
-    if (!recipeExists) {
-        res.statusCode = 404
-    }
-
     return {
-        rtitle: rtitle,
-        statusCode: recipeExists ? 200 : 404
+        rtitle,
+        recipeExists
     }
 }
 

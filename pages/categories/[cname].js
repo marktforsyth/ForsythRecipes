@@ -1,17 +1,15 @@
 import React from 'react'
-import Error from '../../pages/_error'
+import Custom404 from '../../pages/404'
 import { NextSeo } from 'next-seo'
 
 import RecipeBtn from '../../components/recipe-button'
 
 import Categories from '../../data/categories.json'
 
-const RecipeCategoryDetail = ({ cname, statusCode }) => {
-    if (statusCode === 404) {
-        return <Error statusCode={statusCode} />
+const RecipeCategoryDetail = ({ cname, categoryExists }) => {
+    if (!categoryExists) {
+        return <Custom404 />
     }
-
-    console.log(Object.keys(Categories).includes('jon'))
 
     if (!cname) {
         return null
@@ -34,17 +32,13 @@ const RecipeCategoryDetail = ({ cname, statusCode }) => {
     )
 }
 
-RecipeCategoryDetail.getInitialProps = async ({ query, res }) => {
+RecipeCategoryDetail.getInitialProps = async ({ query }) => {
     const { cname } = query
     const categoryExists = Object.keys(Categories).includes(cname)
 
-    if (!categoryExists) {
-        res.statusCode = 404
-    }
-
     return {
-        cname: cname,
-        statusCode: categoryExists ? 200 : 404
+        cname,
+        categoryExists
     }
 }
 

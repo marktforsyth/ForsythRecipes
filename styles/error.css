@@ -1,3 +1,4 @@
+/* Main container styles */
 .error-container {
     display: flex;
     flex-direction: column;
@@ -8,22 +9,17 @@
     font-family: "Antic Slab", serif;
 }
 
-.error-container > .error-heading {
-    font-size: 3em;
-    font-family: 'EB Garamond', serif;
-    font-weight: bold;
-    margin-bottom: 18px;
-}
-
+/* Message styles */
 .error-container > .error-msg {
     font-size: 2em;
 }
 
+/* Return home link styles */
 .error-container > .return-home {
     border: 1px solid white;
     font-size: 1.5em;
     color: blue;
-    margin-top: 25px;
+    margin-top: 15px;
     transition: 0.5s ease-in-out;
     cursor: pointer;
 }
@@ -35,4 +31,10 @@
 .error-container > .return-home:hover {
     color: darkblue;
     border-bottom: 1px solid darkblue;
+}
+
+/* Custom 404 styles */
+.error-container > .custom-404-heading {
+    font-size: 3em;
+    margin-bottom: 18px;
 }

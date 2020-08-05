@@ -3,27 +3,28 @@ import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 
 import RecipeBtn from '../components/recipe-button'
-import { clearSearchbar, query } from '../components/nav-bar'
 
 import Recipes from '../data/recipes.json'
 
 const SearchResults = () => {
-    // const pageUrl = 'http://localhost:3000/search?q=chicken'
-    // const queryIndex = pageUrl.indexOf('?q=')
-    // const query = pageUrl.substring(queryIndex + 3).replace(/%20/g, ' ')
-
     const router = useRouter()
+    let { q: query } = router.query
+
     useEffect(() => {
-        const handleRouteChange = url => {
-            clearSearchbar()
+        const handleRouteChange = () => {
+            query = router.query
         }
 
-        router.events.on('routeChangeStart', handleRouteChange)
-
+        router.events.on('routeChangeComplete', handleRouteChange)
+        
         return () => {
-            router.events.off('routeChangeStart', handleRouteChange)
+            router.events.off('routeChangeComplete', handleRouteChange)
         }
     }, [])
+
+    if (!query) {
+        return null
+    }
 
     const findByRecipeTitle = () => {
         let recipeTitlesThatMatch = []

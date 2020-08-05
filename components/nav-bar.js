@@ -1,25 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import SearchIcon from '../public/images/nav-bar/search.svg'
 import HomeIcon from '../public/images/nav-bar/home.svg'
 import AddRecipeIcon from '../public/images/nav-bar/add-recipe.svg'
 
-let clearSearchbar
-let query
-
 const NavBar = () => {
     const router = useRouter()
     const [searchbarValue, setSearchbarValue] = useState('')
 
-    clearSearchbar = () => {
-        setSearchbarValue('')
-    }
+    useEffect(() => {
+        const handleRouteChange = () => {
+            setSearchbarValue('')
+            window.getSelection().removeAllRanges()
+        }
+
+        router.events.on('routeChangeComplete', handleRouteChange)
+        
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange)
+        }
+    }, [])
 
     const checkForSubmit = (event) => {
         if (event.key === 'Enter' && event.target.value !== '') {            
-            router.push('/search', `/search?q=${event.target.value}`)
-            query = event.target.value
+            router.push({
+                pathname: '/search',
+                query: { q: event.target.value },
+            })
         }
     }
 
@@ -53,4 +61,3 @@ const NavBar = () => {
 }
 
 export default NavBar
-export { clearSearchbar, query }

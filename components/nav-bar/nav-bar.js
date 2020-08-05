@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import SearchIcon from '../public/images/nav-bar/search.svg'
-import HomeIcon from '../public/images/nav-bar/home.svg'
-import AddRecipeIcon from '../public/images/nav-bar/add-recipe.svg'
+import SearchIcon from '../../public/images/nav-bar/search.svg'
+import HomeIcon from '../../public/images/nav-bar/home.svg'
+import AddRecipeIcon from '../../public/images/nav-bar/add-recipe.svg'
 
 const NavBar = () => {
     const router = useRouter()

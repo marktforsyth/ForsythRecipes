@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { NextSeo } from 'next-seo'
 
-import MainMenu from '../components/main-menu'
+import MainMenu from '../components/menu/main-menu'
 
 const HomePage = () => {
   

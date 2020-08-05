@@ -2,7 +2,7 @@ import React from 'react'
 
 import RecipeCategoryBtn from './recipe-category-button'
 
-import Categories from '../data/categories.json'
+import Categories from '../../data/categories.json'
 
 const MainMenu = () => {
     let categoryNames = Object.keys(Categories)

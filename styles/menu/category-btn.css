@@ -1,22 +1,3 @@
-/* Title styles */
-.menu-title {
-    font-size: 2.6em;
-}
-
-.menu-title::before {
-    content: "\00bb";
-}
-
-/* Main container styles */
-.category-btns-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 22px;
-    margin-top: 50px;
-    margin-bottom: 25px;
-}
-
-/* Category button styles */
 .category-btns-container div > .category-btn {
     display: flex;
     flex-direction: column;
@@ -47,20 +28,4 @@
     font-weight: bold;
     font-family: 'EB Garamond', serif;
     transition: 0.5s ease-in-out;
-}
-
-/* Recipe button styles */
-.recipe-btn {
-    border: 1px solid white;
-    border-left: 2px solid white;
-    padding: 12px 12px 12px 30px;
-    font-size: 1.06rem;
-    transition: 0.5s ease border-left-color;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-}
-
-.recipe-btn:hover {
-    border-left: 2px solid black;
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 
-import RecipeBtn from '../components/recipe-button'
+import RecipeBtn from '../components/menu/recipe-button'
 
 import Recipes from '../data/recipes.json'
 

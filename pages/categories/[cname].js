@@ -2,7 +2,7 @@ import React from 'react'
 import Custom404 from '../../pages/404'
 import { NextSeo } from 'next-seo'
 
-import RecipeBtn from '../../components/recipe-button'
+import RecipeBtn from '../../components/menu/recipe-button'
 
 import Categories from '../../data/categories.json'
 

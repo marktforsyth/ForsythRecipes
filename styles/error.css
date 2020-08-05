@@ -4,12 +4,13 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100vh - 102px);
+    height: calc(100vh - 125px);
     font-family: "Antic Slab", serif;
 }
 
 .error-container > .error-heading {
     font-size: 3em;
+    font-family: 'EB Garamond', serif;
     font-weight: bold;
     margin-bottom: 18px;
 }
@@ -23,7 +24,7 @@
     font-size: 1.5em;
     color: blue;
     margin-top: 25px;
-    transition: 0.5 ease-in-out;
+    transition: 0.5s ease-in-out;
     cursor: pointer;
 }
 
@@ -33,4 +34,5 @@
 
 .error-container > .return-home:hover {
     color: darkblue;
+    border-bottom: 1px solid darkblue;
 }

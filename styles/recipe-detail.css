@@ -1,0 +1,87 @@
+/* Element styles */
+pre {
+    font-family: inherit;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.5;
+}
+
+/* Main container styles */
+.recipe-detail-heading-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Left column styles */
+.recipe-detail-heading-container > .left-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recipe-detail-heading-container > .left-column > .creator-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recipe-detail-heading-container > .left-column > .creator-container > .profile-picture {
+    width: 49px;
+    border-radius: 50%;
+}
+
+/* Right solumn styles */
+.recipe-detail-heading-container > .right-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 2px;
+}
+
+.recipe-detail-heading-container > .right-column > .important-date {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.recipe-detail-heading-container > .right-column > .minor-date {
+    font-style: italic;
+    color: #363636;
+}
+
+/* 
+.recipe-detail-heading-container > .recipe-info-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 35px;
+}
+
+.recipe-detail-heading-container > .recipe-info-container > .creator::before {
+    content: '\2756';
+    padding-right: 3px;
+}
+
+.recipe-detail-heading-container > .recipe-info-container > .creator {
+    font-size: 1.47em;
+    font-family: "Antic Slab", serif;
+    margin-right: 10px;
+}
+
+.recipe-detail-heading-container > .recipe-info-container > .dates-container {
+    margin-left: 200px;
+}
+
+.recipe-detail-heading-container > .recipe-info-container > .dates-container > .date {
+    font-size: 1.1em;
+    margin-right: 10px;
+}
+
+.recipe-detail-heading-container > .recipe-info-container > .dates-container > .date:nth-child(2) {
+    color: gray;
+} */

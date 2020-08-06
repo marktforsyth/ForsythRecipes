@@ -11,16 +11,6 @@
 }
 
 /* Specific element styles */
-pre {
-  font-family: inherit;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
-  line-height: 1.5;
-}
   
 h1 {
   font-family: 'EB Garamond', serif;

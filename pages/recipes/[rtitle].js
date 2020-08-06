@@ -1,10 +1,12 @@
 import React from 'react'
-import Custom404 from '../../pages/404'
 import { NextSeo } from 'next-seo'
+import moment from 'moment'
+
+import Custom404 from '../../pages/404'
 
 import Recipes from '../../data/recipes.json'
 
-const RecipeDetail = ({ rtitle, recipeExists }) => {
+const RecipeDetail = ({ rtitle, recipeExists }, props) => {
     if (!recipeExists) {
         return <Custom404 />
     }
@@ -13,24 +15,58 @@ const RecipeDetail = ({ rtitle, recipeExists }) => {
         return null
     }
 
+    const profilePicture = '/images/profile-pictures/no-img-provided.png'
+
+    const formatDate = (date) => {
+        return moment(
+            date.toString()
+        ).format('MMMM Do, YYYY')
+    }
+
+    const displayLeftColumn = () => {
+        if (Recipes[rtitle].modified) {
+            return (
+                <div className='right-column'>
+                    <div className='important-date'>
+                        {formatDate(Recipes[rtitle].modified)}
+                    </div>
+
+                    <div className='minor-date'>
+                        Created - {formatDate(Recipes[rtitle].created)}
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className='right-column'>
+                    <div className='important-date'>
+                        {formatDate(Recipes[rtitle].created)}
+                    </div>
+                </div>
+            )
+        }
+    }
+
     return(
         <div>
             <NextSeo
                 title={rtitle + ' - Forsyth Recipes'}
             />
 
-            <h1>{rtitle}</h1>
+            <div className='recipe-detail-heading-container'>
+                <div className='left-column'>
+                    <h1>{rtitle}</h1>
 
-            <div>
-                <pre>{Recipes[rtitle].body}</pre>
+                    <div className='creator-container'>
+                        <img className='profile-picture' src={profilePicture} alt='Profile Picture' />
+                        {Recipes[rtitle].creator}
+                    </div>
+                </div>
 
-                <br></br>
-                <p>Created by: {Recipes[rtitle].creator}</p>
-                <p>Created on: {Recipes[rtitle].created}</p>
-                {Recipes[rtitle].modified ? (
-                    <p>Last edited on: {Recipes[rtitle].modified}</p>
-                ) : null}
+                {displayLeftColumn()}
             </div>
+
+            <pre>{Recipes[rtitle].body}</pre>
         </div>
     )
 }

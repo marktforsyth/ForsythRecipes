@@ -1,9 +1,8 @@
 import React from 'react'
-import { useRouter } from 'next/router'
+
+import ErrorReturnHomeLink from '../components/error-return-home-link'
 
 const Error = ({ statusCode }) => {
-    const router = useRouter()
-
     const chooseErrorMessage = () => {
         if (statusCode) {
             return <div className='error-msg'>An error <b>{statusCode}</b> happened on the server</div>
@@ -16,10 +15,7 @@ const Error = ({ statusCode }) => {
         <div className='error-container'>
             {chooseErrorMessage()}
             
-            <button
-                className='return-home'
-                onClick={() => router.push('/')}
-            >Return home</button>
+            <ErrorReturnHomeLink />
         </div>
     )
 }

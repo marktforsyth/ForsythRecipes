@@ -1,7 +1,7 @@
 import React from 'react'
-import Custom404 from '../../pages/404'
 import { NextSeo } from 'next-seo'
 
+import Custom404 from '../../pages/404'
 import RecipeBtn from '../../components/menu/recipe-button'
 
 import Categories from '../../data/categories.json'

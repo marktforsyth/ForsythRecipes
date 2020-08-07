@@ -51,7 +51,9 @@ const SearchResults = () => {
                         </div>
                     ))}
                 </div>
-            ) : null
+            ) : (
+                <h2>No recipes found with matching <i>titles</i>.</h2>
+            )
         )
     }
 
@@ -85,7 +87,7 @@ const SearchResults = () => {
 
     let categoryNameSearchResults = []
     const findByCategoryName = () => {
-        
+
     }
 
     return (

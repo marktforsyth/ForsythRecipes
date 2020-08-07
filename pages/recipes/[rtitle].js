@@ -23,10 +23,10 @@ const RecipeDetail = ({ rtitle, recipeExists }, props) => {
         ).format('MMMM Do, YYYY')
     }
 
-    const displayLeftColumn = () => {
+    const displayDatesContainer = () => {
         if (Recipes[rtitle].modified) {
             return (
-                <div className='right-column'>
+                <div className='dates-container'>
                     <div className='important-date'>
                         {formatDate(Recipes[rtitle].modified)}
                     </div>
@@ -38,7 +38,7 @@ const RecipeDetail = ({ rtitle, recipeExists }, props) => {
             )
         } else {
             return (
-                <div className='right-column'>
+                <div className='dates-container'>
                     <div className='important-date'>
                         {formatDate(Recipes[rtitle].created)}
                     </div>
@@ -52,18 +52,17 @@ const RecipeDetail = ({ rtitle, recipeExists }, props) => {
             <NextSeo
                 title={rtitle + ' - Forsyth Recipes'}
             />
+            <div className='recipe-detail-heading'>
+                <h1>{rtitle}</h1>
 
-            <div className='recipe-detail-heading-container'>
-                <div className='left-column'>
-                    <h1>{rtitle}</h1>
+                <div className='recipe-heading-data'>
+                    {displayDatesContainer(                                                                                                                                                                                                                                                                                                             )}
 
                     <div className='creator-container'>
                         <img className='profile-picture' src={profilePicture} alt='Profile Picture' />
-                        {Recipes[rtitle].creator}
+                        <div className='text'>{Recipes[rtitle].creator}</div>
                     </div>
                 </div>
-
-                {displayLeftColumn()}
             </div>
 
             <pre>{Recipes[rtitle].body}</pre>

@@ -27,19 +27,72 @@ const SearchResults = () => {
     }
 
     const findByRecipeTitle = () => {
-        let recipeTitlesThatMatch = []
-        
+        let searchResults = []
+
+        // foods.forEach(food => {
+        //     if (food.toUpperCase().includes(
+        //         query.toUpperCase()
+        //     )) {
+        //         let numberOfMatchingLetters = 0
+        //         food.split('').forEach(letter => {
+        //             if (query.includes(letter)) {
+        //                 numberOfMatchingLetters += 1
+        //             }
+        //         })
+    
+        //         let differenceInWordLength = Math.abs(food.length - query.length)
+    
+        //         searchResults.push({
+        //             result: food,
+        //             howCloselyItMatches: numberOfMatchingLetters - differenceInWordLength
+        //         })
+        //     }
+        // })
+
         for (let r in Recipes) {
             let recipe = Recipes[r]
 
-            if (recipe.title.toUpperCase().includes(query.toUpperCase())) {
-                recipeTitlesThatMatch.push(recipe.title)
+            if (recipe['title'].toUpperCase().includes(
+                query.toUpperCase()
+            )) {
+                let numberOfMatchingLetters = 0
+                recipe['title'].split('').forEach(letter => {
+                    if (query.includes(letter)) {
+                        numberOfMatchingLetters += 1
+                    }
+                })
+    
+                let differenceInWordLength = Math.abs(recipe['title'].length - query.length)
+    
+                searchResults.push({
+                    result: recipe['title'],
+                    howCloselyItMatches: numberOfMatchingLetters - differenceInWordLength
+                })
             }
         }
 
-        return recipeTitlesThatMatch.map(recipeTitle => (
-            <div key={'search_res_title_' + recipeTitle}>
-                <RecipeBtn name={recipeTitle} />
+        const sortedSearchResultObjects = searchResults.sort((a, b) => {
+            return b.howCloselyItMatches - a.howCloselyItMatches
+        })
+        
+        // for (let r in Recipes) {
+        //     let recipe = Recipes[r]
+
+        //     if (recipe.title.toUpperCase().includes(query.toUpperCase())) {
+        //         recipeTitlesThatMatch.push(recipe.title)
+        //     }
+        // }
+
+        let sortedSearchResults = []
+        for (let r in sortedSearchResultObjects) {
+            sortedSearchResults.push(
+                sortedSearchResultObjects[r].result
+            ) 
+        }
+
+        return sortedSearchResults.map(searchResult => (
+            <div key={'search_res_title_' + searchResult}>
+                <RecipeBtn name={searchResult} />
             </div>
         ))
     }

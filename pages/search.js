@@ -3,8 +3,10 @@ import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 
 import RecipeBtn from '../components/menu/recipe-button'
+import searchDatabase from '../components/search/search-database'
 
 import Recipes from '../data/recipes.json'
+import Categories from '../data/categories.json'
 
 const SearchResults = () => {
     const router = useRouter()
@@ -26,90 +28,64 @@ const SearchResults = () => {
         return null
     }
 
+    let recipleTitleSearchResults = []
     const findByRecipeTitle = () => {
-        let searchResults = []
-
-        // foods.forEach(food => {
-        //     if (food.toUpperCase().includes(
-        //         query.toUpperCase()
-        //     )) {
-        //         let numberOfMatchingLetters = 0
-        //         food.split('').forEach(letter => {
-        //             if (query.includes(letter)) {
-        //                 numberOfMatchingLetters += 1
-        //             }
-        //         })
+        for (let r in Recipes) {
+            let recipe = Recipes[r]
     
-        //         let differenceInWordLength = Math.abs(food.length - query.length)
-    
-        //         searchResults.push({
-        //             result: food,
-        //             howCloselyItMatches: numberOfMatchingLetters - differenceInWordLength
-        //         })
-        //     }
-        // })
+            if (recipe.title.toUpperCase().includes(
+                query.toUpperCase()
+            )) {
+                recipleTitleSearchResults.push(recipe.title)
+            }
+        }
 
+        return (
+            recipleTitleSearchResults.length !== 0 ? (
+                <div>
+                    <h1>Recipes With Matching <i>Titles</i>:</h1>
+
+                    {recipleTitleSearchResults.map(searchResult => (
+                        <div key={'search_res_title_' + searchResult}>
+                            <RecipeBtn name={searchResult} />
+                        </div>
+                    ))}
+                </div>
+            ) : null
+        )
+    }
+
+    let recipleBodySearchResults = []
+    const findByRecipeBody = () => {
         for (let r in Recipes) {
             let recipe = Recipes[r]
 
-            if (recipe['title'].toUpperCase().includes(
+            if (recipe.body.toUpperCase().includes(
                 query.toUpperCase()
-            )) {
-                let numberOfMatchingLetters = 0
-                recipe['title'].split('').forEach(letter => {
-                    if (query.includes(letter)) {
-                        numberOfMatchingLetters += 1
-                    }
-                })
-    
-                let differenceInWordLength = Math.abs(recipe['title'].length - query.length)
-    
-                searchResults.push({
-                    result: recipe['title'],
-                    howCloselyItMatches: numberOfMatchingLetters - differenceInWordLength
-                })
+            ) && !recipleTitleSearchResults.includes(recipe.title)) {
+                recipleBodySearchResults.push(recipe.title)
             }
         }
 
-        const sortedSearchResultObjects = searchResults.sort((a, b) => {
-            return b.howCloselyItMatches - a.howCloselyItMatches
-        })
+        console.log(recipleBodySearchResults.length)
         
-        // for (let r in Recipes) {
-        //     let recipe = Recipes[r]
-
-        //     if (recipe.title.toUpperCase().includes(query.toUpperCase())) {
-        //         recipeTitlesThatMatch.push(recipe.title)
-        //     }
-        // }
-
-        let sortedSearchResults = []
-        for (let r in sortedSearchResultObjects) {
-            sortedSearchResults.push(
-                sortedSearchResultObjects[r].result
-            ) 
-        }
-
-        return sortedSearchResults.map(searchResult => (
-            <div key={'search_res_title_' + searchResult}>
-                <RecipeBtn name={searchResult} />
-            </div>
-        ))
+        return (
+            recipleBodySearchResults.length !== 0 ? (
+                <div>
+                    <h1>Recipes With Matching <i>Content</i>:</h1>
+                    {recipleBodySearchResults.map(searchResult => (
+                        <div key={'search_res_body_' + searchResult}>
+                            <RecipeBtn name={searchResult} />
+                        </div>
+                    ))}
+                </div>
+            ) : null
+        )
     }
 
-    const findByRecipeBody = () => {
-        // Note: if a recipe matches in titles, don't match it in bodies (so no repeats)
-        /* e.g.
-            if (recipeTitlesThatMatch.includes(catTitleThatMatches)) {
-                don't bother
-            }
-        */
-
-        // Better to use state? Or just declare recipeTitlesThatMatch on SearchResult()'s scope?
-    }
-
+    let categoryNameSearchResults = []
     const findByCategoryName = () => {
-
+        
     }
 
     return (
@@ -124,14 +100,18 @@ const SearchResults = () => {
                 </h2>
             </div>
 
-            <h1>Recipes With Matching <i>Titles</i>:</h1>
-            <div>
-                {findByRecipeTitle()}
-            </div>
-
-            <h1>Recipes With Matching <i>Content</i>:</h1>
+                {/* {searchDatabase(Recipes, query, 'title').map(searchResult => (
+                    <div key={'search_res_title_' + searchResult}>
+                        <RecipeBtn name={searchResult} />
+                    </div>
+                ))} */}
+            {findByRecipeTitle()}
+            {findByRecipeBody()}
 
             <h1>Categories That Match:</h1>
+            <div>
+                {findByCategoryName()}
+            </div>
         </div>
     )
 }

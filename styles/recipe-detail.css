@@ -26,30 +26,33 @@ h1 {
 }
 
 /* Dates container styles */
-.recipe-detail-heading-container > .dates-container {
-    display: flex;
+.recipe-detail-heading > .recipe-heading-data > .dates-container {
+    /* display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
     letter-spacing: 2px;
+    margin-top: 20px;
 }
 
-.recipe-detail-heading-container > .dates-container > .important-date {
-    font-size: 1.2em;
+.recipe-detail-heading > .recipe-heading-data > .dates-container > .important-date {
+    font-size: 1.1em;
     font-weight: 500;
     margin-right: 10px;
 }
 
-.recipe-detail-heading-container > .dates-container > .minor-date {
+.recipe-detail-heading > .recipe-heading-data > .dates-container > .minor-date {
     font-style: italic;
     color: #363636;
+    font-size: 0.9em;
 }
 
 /* Creator container styles */
 .creator-container {
     display: flex;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
+    margin-top: 13px;
     /* padding-bottom: 10px;
     border-bottom: 1px solid rgb(185, 185, 185); */
 }
@@ -61,6 +64,7 @@ h1 {
 
 .creator-container > .text {
     letter-spacing: 2px;
-    margin-left: 5px;
-    font-weight: 500;
+    margin-left: 15px;
+    font-weight: bold;
+    font-family: "Antic Slab", serif;
 }

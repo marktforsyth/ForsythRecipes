@@ -45,11 +45,13 @@ const SearchResults = () => {
                 <div>
                     <h1>Recipes With Matching <i>Titles</i>:</h1>
 
-                    {recipleTitleSearchResults.map(searchResult => (
-                        <div key={'search_res_title_' + searchResult}>
-                            <RecipeBtn name={searchResult} />
-                        </div>
-                    ))}
+                    <div className='results-container'>
+                        {recipleTitleSearchResults.map(searchResult => (
+                            <div key={'search_res_title_' + searchResult}>
+                                <RecipeBtn name={searchResult} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ) : (
                 <h2>No recipes found with matching <i>titles</i>.</h2>
@@ -75,11 +77,14 @@ const SearchResults = () => {
             recipleBodySearchResults.length !== 0 ? (
                 <div>
                     <h1>Recipes With Matching <i>Content</i>:</h1>
-                    {recipleBodySearchResults.map(searchResult => (
-                        <div key={'search_res_body_' + searchResult}>
-                            <RecipeBtn name={searchResult} />
-                        </div>
-                    ))}
+
+                    <div className='results-container'>
+                        {recipleBodySearchResults.map(searchResult => (
+                            <div key={'search_res_body_' + searchResult}>
+                                <RecipeBtn name={searchResult} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             ) : null
         )
@@ -98,7 +103,7 @@ const SearchResults = () => {
             
             <div className='result-heading-container'>
                 <h2 className='result-heading'>
-                    <i>Showing results for</i> <span>{query}</span>
+                    <i>Showing results for</i> <span className='search-query'>{query}</span>
                 </h2>
             </div>
 

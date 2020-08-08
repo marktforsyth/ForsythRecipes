@@ -6,7 +6,7 @@ import Custom404 from '../../pages/404'
 
 import Recipes from '../../data/recipes.json'
 
-const RecipeDetail = ({ rtitle, recipeExists }, props) => {
+const RecipeDetail = ({ rtitle, recipeExists }) => {
     if (!recipeExists) {
         return <Custom404 />
     }
@@ -56,7 +56,7 @@ const RecipeDetail = ({ rtitle, recipeExists }, props) => {
                 <h1>{rtitle}</h1>
 
                 <div className='recipe-heading-data'>
-                    {displayDatesContainer(                                                                                                                                                                                                                                                                                                             )}
+                    {displayDatesContainer()}
 
                     <div className='creator-container'>
                         <img className='profile-picture' src={profilePicture} alt='Profile Picture' />

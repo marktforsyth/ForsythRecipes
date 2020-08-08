@@ -9,9 +9,13 @@
     margin-top: -15px;
 }
 
-.result-heading-container > .result-heading span {
+.result-heading-container > .result-heading > .search-query {
     font-family: 'EB Garamond', serif;
     font-weight: bold;
     font-size: 1.8rem;
     margin-left: 8px;
+}
+
+.results-container {
+    margin-bottom: 30px;
 }

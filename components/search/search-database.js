@@ -5,10 +5,11 @@ const searchDatabase = (Database, query, dataSection, Button) => {
     let recipeTitleSearchResults = []
 
     for (let d in Database) {
+        // Refactor?
         let data = Database[d]
 
         let resultNotAlreadyListed = true
-        if (dataSection === 'body' && recipeTitleSearchResults.length !== 0) {
+        if (dataSection === 'body' && recipeTitleSearchResults.includes(data.title)) {
             resultNotAlreadyListed = false
         }
 
@@ -16,10 +17,12 @@ const searchDatabase = (Database, query, dataSection, Button) => {
             query.toUpperCase()
         ) && resultNotAlreadyListed) {
             if (dataSection === 'body') {
-                searchResults.push(data['title'])
+                searchResults.push(data.title)
             } else {
                 searchResults.push(data[dataSection])
             }
+
+            console.log(data['title'], resultNotAlreadyListed)
 
             if (dataSection === 'title') {
                 recipeTitleSearchResults.push(data[dataSection])
@@ -52,11 +55,13 @@ const searchDatabase = (Database, query, dataSection, Button) => {
             <div className={dataSection !== 'name' ? 'result-section' : null}>
                 {renderHeading()}
 
-                {searchResults.map(searchResult => (
-                    <div key={'search_res_' + dataSection + searchResult}>
-                        <Button name={searchResult} />
-                    </div>
-                ))}
+                <div className={dataSection === 'name' ? 'category-btns-container' : null}>
+                    {searchResults.map(searchResult => (
+                        <div key={'search_res_' + dataSection + searchResult}>
+                            <Button name={searchResult} />
+                        </div>
+                    ))}
+                </div>
             </div>
         ) : renderFallbackHeading()
     )

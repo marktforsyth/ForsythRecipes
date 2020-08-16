@@ -1,11 +1,10 @@
 import React from 'react'
 
+let recipeTitleSearchResults = []
 const searchDatabase = (Database, query, dataSection, Button) => {
     let searchResults = []
-    let recipeTitleSearchResults = []
 
     for (let d in Database) {
-        // Refactor?
         let data = Database[d]
 
         let resultNotAlreadyListed = true
@@ -21,8 +20,6 @@ const searchDatabase = (Database, query, dataSection, Button) => {
             } else {
                 searchResults.push(data[dataSection])
             }
-
-            console.log(data['title'], resultNotAlreadyListed)
 
             if (dataSection === 'title') {
                 recipeTitleSearchResults.push(data[dataSection])
@@ -46,7 +43,7 @@ const searchDatabase = (Database, query, dataSection, Button) => {
         } else if (dataSection === 'body') {
             return <h2>No recipes found with matching <i>content</i>.</h2>
         } else {
-            return <h2>No matching categories found.</h2>
+            return <h2><i>. . .  No matching categories found.</i></h2>
         }
     }
 

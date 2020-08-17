@@ -1,6 +1,8 @@
 import React from 'react'
 
-let recipeTitleSearchResults = []
+const recipeTitleSearchResults = []
+let amountOfNoResultSections = 0
+
 const searchDatabase = (Database, query, dataSection, Button) => {
     let searchResults = []
 
@@ -38,13 +40,24 @@ const searchDatabase = (Database, query, dataSection, Button) => {
     }
 
     const renderFallbackHeading = () => {
+        amountOfNoResultSections += 1
+
         if (dataSection === 'title') {
-            return <h2>No recipes found with matching <i>titles</i>.</h2>
+            // return <h2 class='no-results-found-section-heading'>No recipes found with matching <i>titles</i>.</h2>
+            return ''
         } else if (dataSection === 'body') {
-            return <h2>No recipes found with matching <i>content</i>.</h2>
+            return <h2 class='no-results-found-section-heading'>No recipes found with matching <i>content</i>.</h2>
         } else {
-            return <h2><i>. . .  No matching categories found.</i></h2>
+            return <h2 class='no-results-found-section-heading'>No matching categories found.</h2>
         }
+    }
+
+    const updateNoResultsCount = () => {
+        amountOfNoResultSections += 1
+    }
+
+    if (dataSection === 'name' && amountOfNoResultSections >= 3) {
+        return <h1 class='no-results-found-total'>No results found for <span>{query}</span></h1>
     }
 
     return (
@@ -60,7 +73,7 @@ const searchDatabase = (Database, query, dataSection, Button) => {
                     ))}
                 </div>
             </div>
-        ) : renderFallbackHeading()
+        ) : updateNoResultsCount() //renderFallbackHeading()
     )
 }
 

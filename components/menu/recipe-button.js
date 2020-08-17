@@ -9,7 +9,7 @@ const RecipeBtn = (props) => {
             <button
                 className='recipe-btn'
                 onClick={() => {
-                    router.push('/recipes/[rtitle]', `/recipes/${props.name}`)
+                    router.push('/recipes/[rtitle]', `/recipes/${encodeURIComponent(props.name)}`)
                 }
             }>{props.name}</button>
         </div>

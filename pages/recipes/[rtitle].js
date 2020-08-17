@@ -7,6 +7,11 @@ import Custom404 from '../../pages/404'
 import Recipes from '../../data/recipes.json'
 
 const RecipeDetail = ({ rtitle, recipeExists }) => {
+    // console.log('Escuchame! recipeExists', Recipes[rtitle], Recipes['Algerian%20Flatbread'])
+    // console.log('rtitle', rtitle)
+
+    // console.log('Query: ', query)
+
     if (!recipeExists) {
         return <Custom404 />
     }

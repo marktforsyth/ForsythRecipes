@@ -19,3 +19,22 @@
 .result-section {
     margin-bottom: 30px;
 }
+
+.no-results-found-total {
+    font-weight: 300;
+    font-style: italic;
+}
+
+.no-results-found-total span {
+    font-weight: bold;
+    font-style: initial;
+}
+
+.no-results-found-section-heading {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.8em;
+}
+
+.no-results-found-section-heading::before {
+    content: '... ';
+}

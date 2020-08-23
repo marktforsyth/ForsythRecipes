@@ -43,12 +43,12 @@ const searchDatabase = (Database, query, dataSection, Button) => {
         amountOfNoResultSections += 1
 
         if (dataSection === 'title') {
-            // return <h2 class='no-results-found-section-heading'>No recipes found with matching <i>titles</i>.</h2>
+            // return <h2 className='no-results-found-section-heading'>No recipes found with matching <i>titles</i>.</h2>
             return ''
         } else if (dataSection === 'body') {
-            return <h2 class='no-results-found-section-heading'>No recipes found with matching <i>content</i>.</h2>
+            return <h2 className='no-results-found-section-heading'>No recipes found with matching <i>content</i>.</h2>
         } else {
-            return <h2 class='no-results-found-section-heading'>No matching categories found.</h2>
+            return <h2 className='no-results-found-section-heading'>No matching categories found.</h2>
         }
     }
 
@@ -57,7 +57,7 @@ const searchDatabase = (Database, query, dataSection, Button) => {
     }
 
     if (dataSection === 'name' && amountOfNoResultSections >= 3) {
-        return <h1 class='no-results-found-total'>No results found for <span>{query}</span></h1>
+        return <h1 className='no-results-found-total'>No results found for <span>{query}</span></h1>
     }
 
     return (

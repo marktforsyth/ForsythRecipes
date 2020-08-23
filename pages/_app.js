@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <div>
         <NavBar />
-
+        
         <div className='page-container'>
           <div className='column'>
             <Component {...pageProps} />

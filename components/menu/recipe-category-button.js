@@ -11,7 +11,7 @@ const RecipeCategoryBtn = (props) => {
             <button
                 className='category-btn'
                 onClick={() => {
-                    router.push('/categories/[cname]', `/categories/${props.name}`)
+                    router.push('/category/[cname]', `/category/${props.name}`)
                 }
             }>
                 <img src={categoryImage} draggable={false} />

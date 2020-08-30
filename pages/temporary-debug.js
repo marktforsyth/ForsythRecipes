@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const TemporaryDebugPage = () => {
+const TemporaryDebugPage = ({ recipes }) => {
     // const fetcher = url => fetch(url).then(r => r.json())
     // const { data, error } = useSWR('/api/recipes', fetcher)
 
@@ -10,7 +10,35 @@ const TemporaryDebugPage = () => {
 
     // return <h1>Hello {data['Crepes'].body}!</h1>
 
-    let recipes = {'Crepes': {body: 'Hello'}}
+    // const [recipes, setRecipes] = useState({})
+
+    // useEffect(() => {
+        // axios.get('/api/recipes')
+        // .then(response => {
+        //     setRecipes(response.data)
+        // })
+        // .catch(error => {
+        //     console.log('TemporaryDebugPage error', error)
+        // })
+    // }, [])
+
+    console.log(recipes.data)
+
+    if (!recipes) {
+        return null
+    }
+
+    return (
+        <div>
+        <h1>{recipes['Crepes'].body}</h1>
+        {/* <ul>{categories['Bread'].recipeTitles.map(rtitle => <li>{rtitle}</li>)}</ul> */}
+        </div>
+    )
+}
+
+TemporaryDebugPage.getInitialProps = async () => {
+    // const recipes = {'Crepes': {'body': 'example recipe'}}
+    let recipes
 
     axios.get('/api/recipes')
         .then(response => {
@@ -20,12 +48,9 @@ const TemporaryDebugPage = () => {
             console.log('TemporaryDebugPage error', error)
         })
 
-    return (
-        <div>
-        <h1>{recipes['Crepes'].body}</h1>
-        {/* <ul>{categories['Bread'].recipeTitles.map(rtitle => <li>{rtitle}</li>)}</ul> */}
-        </div>
-    )
+    console.log('Hello')
+
+    return { recipes }
 }
 
 export default TemporaryDebugPage

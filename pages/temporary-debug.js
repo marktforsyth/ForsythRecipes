@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const TemporaryDebugPage = ({ recipes }) => {
-    // const fetcher = url => fetch(url).then(r => r.json())
-    // const { data, error } = useSWR('/api/recipes', fetcher)
+const TemporaryDebugPage = () => {
+    const [recipes, setRecipes] = useState()
+    const [categories, setCategories] = useState()
 
-    // if (error) return <h1>Error fetching data.</h1>
-    // if (!data) return <div>loading...</div>
+    useEffect(() => {
+        axios.post('/api/recipes', { 'theGreatChicken': {
+            title: 'theGreatChicken - TITLE',
+            body: 'Add chicken to the mixture, then bake.',
+            creator: 'What even?'
+        } })
+        .then(response => {
+            console.log('response', response)
+        })
+        .catch(error => {
+            console.log('TemporaryDebugPage error', error)
+        })
 
-    // return <h1>Hello {data['Crepes'].body}!</h1>
-
-    // const [recipes, setRecipes] = useState({})
-
-    // useEffect(() => {
         // axios.get('/api/recipes')
         // .then(response => {
         //     setRecipes(response.data)
@@ -20,37 +25,46 @@ const TemporaryDebugPage = ({ recipes }) => {
         // .catch(error => {
         //     console.log('TemporaryDebugPage error', error)
         // })
-    // }, [])
 
-    console.log(recipes.data)
+        // axios.get('/api/categories')
+        // .then(response => {
+        //     setCategories(response.data)
+        // })
+        // .catch(error => {
+        //     console.log('TemporaryDebugPage error', error)
+        // })
+    }, [])
+
+    // console.log('recipes', recipes)
 
     if (!recipes) {
         return null
     }
 
+    if (!categories) {
+        return null
+    }
+
     return (
         <div>
-        <h1>{recipes['Crepes'].body}</h1>
-        {/* <ul>{categories['Bread'].recipeTitles.map(rtitle => <li>{rtitle}</li>)}</ul> */}
+            {/* <h1>{recipes['theGreatChicken'].title}</h1> */}
         </div>
     )
 }
 
-TemporaryDebugPage.getInitialProps = async () => {
-    // const recipes = {'Crepes': {'body': 'example recipe'}}
-    let recipes
+// TemporaryDebugPage.getInitialProps = async () => {
+//     // const recipes = {'Crepes': {'body': 'example recipe'}}
+//     let recipes
 
-    axios.get('/api/recipes')
-        .then(response => {
-            recipes = response.data
-        })
-        .catch(error => {
-            console.log('TemporaryDebugPage error', error)
-        })
+//     axios.get('/api/recipes')
+//         .then(response => {
+//             recipes = response
+//         })
+//         .catch(error => {
+//             console.log('TemporaryDebugPage error', error)
+//         })
 
-    console.log('Hello')
-
-    return { recipes }
-}
+//     return { recipes }
+// }
 
 export default TemporaryDebugPage

@@ -12,6 +12,7 @@ import '../styles/menu/menu.css'
 import '../styles/menu/category-btn.css'
 import '../styles/menu/recipe-btn.css'
 import '../styles/recipe-detail.css'
+import '../styles/media-queries.css'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()

@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import fs from 'fs'
+// import fs from 'fs'
 
 import Recipes from './recipes.json'
 
@@ -12,4 +12,10 @@ export default (req, res) => {
 
     res.statusCode = 200
     res.json(recipesToExport)
+
+    // console.log(fs.readFileSync('categories.json', 'utf8'))
 }
+
+// export async function getStaticProps() {
+//     console.log(fs.readFileSync('/categories.json', 'utf8'))
+// }

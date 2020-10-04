@@ -47,7 +47,9 @@ const TemporaryDebugPage = () => {
 
     return (
         <div>
-            {/* <h1>{recipes['theGreatChicken'].title}</h1> */}
+            {/* <h1>Recipe - {recipes['Crepes'].title}</h1>
+
+            <p>{recipes['Crepes'].body}</p> */}
         </div>
     )
 }

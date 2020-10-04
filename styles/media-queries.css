@@ -1,0 +1,20 @@
+@media (max-width: 615px) {
+    .page-container {
+        margin-top: 130px;
+    }
+
+    .page-container > .column {
+        width: 90%;
+    }
+
+    .menu-title {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .nav-bar-container > .nav-bar {
+        padding-bottom: 15px;
+    }
+}
+
+/* change misc to random */

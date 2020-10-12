@@ -6,11 +6,11 @@ const TemporaryDebugPage = () => {
     const [categories, setCategories] = useState()
 
     useEffect(() => {
-        axios.post('/api/recipes', { 'theGreatChicken': {
-            title: 'theGreatChicken - TITLE',
-            body: 'Add chicken to the mixture, then bake.',
+        axios.post('/api/recipes', {
+            title: 'the Meatiocre Chicken',
+            body: 'Add chicken to the mixture, then bake. Will not taste good.',
             creator: 'What even?'
-        } })
+        })
         .then(response => {
             console.log('response', response)
         })

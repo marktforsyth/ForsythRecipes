@@ -33,6 +33,7 @@
     font-family: 'Antic Slab', serif;
     font-size: 2rem;
     border: none;
+    width: 100%;
 }
 
 .nav-bar-container > .nav-bar > .right-column input:focus,

@@ -1,19 +1,36 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import RecipeBtn from '../components/menu/recipe-button'
 import RecipeCategoryBtn from '../components/menu/recipe-category-button'
 import searchDatabase from '../components/search/search-database'
 
-import Recipes from '../data/recipes.json'
-import Categories from '../data/categories.json'
-
 const SearchResults = () => {
     const router = useRouter()
     let { q: query } = router.query
 
+    const [recipes, setRecipes] = useState()
+    const [categories, setCategories] = useState()
+
     useEffect(() => {
+        axios.get('/api/recipes')
+        .then(response => {
+            setRecipes(response.data)
+        })
+        .catch(error => {
+            console.log('SearchResults error', error)
+        })
+
+        axios.get('/api/categories')
+        .then(response => {
+            setCategories(response.data)
+        })
+        .catch(error => {
+            console.log('SearchResults error', error)
+        })
+
         const handleRouteChange = () => {
             query = router.query
         }
@@ -29,6 +46,10 @@ const SearchResults = () => {
         return null
     }
 
+    if (!recipes || !categories) {
+        return null
+    }
+
     return (
         <div>
             <NextSeo
@@ -41,9 +62,9 @@ const SearchResults = () => {
                 </h2>
             </div>
 
-            {searchDatabase(Recipes, query, 'title', RecipeBtn)}
-            {searchDatabase(Recipes, query, 'body', RecipeBtn)}
-            {searchDatabase(Categories, query, 'name', RecipeCategoryBtn)}
+            {searchDatabase(recipes, query, 'title', RecipeBtn)}
+            {searchDatabase(recipes, query, 'body', RecipeBtn)}
+            {searchDatabase(categories, query, 'name', RecipeCategoryBtn)}
         </div>
     )
 }

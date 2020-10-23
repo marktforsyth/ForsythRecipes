@@ -1,11 +1,26 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import axios from 'axios'
 
 import RecipeCategoryBtn from './recipe-category-button'
 
-import Categories from '../../data/categories.json'
-
 const MainMenu = () => {
-    let categoryNames = Object.keys(Categories)
+    const [categories, setCategories] = useState()
+
+    useEffect(() => {
+        axios.get('/api/categories')
+        .then(response => {
+            setCategories(response.data)
+        })
+        .catch(error => {
+            console.log('MainMenu error', error)
+        })
+    }, [])
+
+    if (!categories) {
+        return null
+    }
+
+    const categoryNames = Object.keys(categories)
 
     return(
         <div>

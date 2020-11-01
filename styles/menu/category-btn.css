@@ -4,28 +4,24 @@
     align-items: center;
     justify-content: center;
     padding: 0px;
-    border: 1px solid white;
     cursor: pointer;
+    transition: 0.4s ease-in-out;
+    width: 220px;
+    height: 50px;
+    border: 1px solid gray;
 }
 
-.category-btns-container div > .category-btn:hover img {
-    -webkit-box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.19);
-    -moz-box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.19);
-    box-shadow: 0px 0px 32px 0px rgba(0,0,0,0.19);
-}
-
-.category-btns-container div > .category-btn:hover > .category-text {
-    color: black; /* placeholder -- will likely change color, or just leave out this effect */
-}
-
-.category-btns-container div > .category-btn img {
-    width: 100%;
-    transition: 0.5s ease-in-out;
+.category-btns-container div > .category-btn:hover {
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    border: 1px solid transparent;
+    background-color: rgb(27, 27, 27);
+    color: rgb(241, 241, 241);
 }
 
 .category-btns-container div > .category-btn > .category-text {
     font-size: 2.3em;
     font-weight: bold;
     font-family: 'EB Garamond', serif;
-    transition: 0.5s ease-in-out;
 }

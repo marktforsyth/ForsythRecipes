@@ -1,23 +1,35 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { NextSeo } from 'next-seo'
 import moment from 'moment'
+import axios from 'axios'
 
 import Custom404 from '../../pages/404'
 
-import Recipes from '../../data/recipes.json'
+const RecipeDetail = ({ rtitle }) => {
+    if (!rtitle) {
+        return null
+    }
 
-const RecipeDetail = ({ rtitle, recipeExists }) => {
-    // console.log('Escuchame! recipeExists', Recipes[rtitle], Recipes['Algerian%20Flatbread'])
-    // console.log('rtitle', rtitle)
+    const [recipes, setRecipes] = useState()
 
-    // console.log('Query: ', query)
+    useEffect(() => {
+        axios.get('/api/recipes')
+        .then(response => {
+            setRecipes(response.data)
+        })
+        .catch(error => {
+            console.log('recipe/[rtitle]-get recipes error', error)
+        })
+    }, [])
+
+    if (!recipes) {
+        return null
+    }
+
+    const recipeExists = Object.keys(recipes).includes(rtitle)
 
     if (!recipeExists) {
         return <Custom404 />
-    }
-
-    if (!rtitle) {
-        return null
     }
 
     const profilePicture = '/images/profile-pictures/no-img-provided.png'
@@ -29,15 +41,15 @@ const RecipeDetail = ({ rtitle, recipeExists }) => {
     }
 
     const displayDatesContainer = () => {
-        if (Recipes[rtitle].modified) {
+        if (recipes[rtitle].modified) {
             return (
                 <div className='dates-container'>
                     <div className='important-date'>
-                        {formatDate(Recipes[rtitle].modified)}
+                        {formatDate(recipes[rtitle].modified)}
                     </div>
 
                     <div className='minor-date'>
-                        Created - {formatDate(Recipes[rtitle].created)}
+                        Created - {formatDate(recipes[rtitle].created)}
                     </div>
                 </div>
             )
@@ -45,7 +57,7 @@ const RecipeDetail = ({ rtitle, recipeExists }) => {
             return (
                 <div className='dates-container'>
                     <div className='important-date'>
-                        {formatDate(Recipes[rtitle].created)}
+                        {formatDate(recipes[rtitle].created)}
                     </div>
                 </div>
             )
@@ -65,24 +77,20 @@ const RecipeDetail = ({ rtitle, recipeExists }) => {
 
                     <div className='creator-container'>
                         <img className='profile-picture' src={profilePicture} alt='Profile Picture' />
-                        <div className='text'>{Recipes[rtitle].creator}</div>
+                        <div className='text'>{recipes[rtitle].creator}</div>
                     </div>
                 </div>
             </div>
 
-            <pre>{Recipes[rtitle].body}</pre>
+            <pre>{recipes[rtitle].body}</pre>
         </div>
     )
 }
 
 RecipeDetail.getInitialProps = async ({ query }) => {
     const { rtitle } = query
-    const recipeExists = Object.keys(Recipes).includes(rtitle)
 
-    return {
-        rtitle,
-        recipeExists
-    }
+    return { rtitle }
 }
 
 export default RecipeDetail

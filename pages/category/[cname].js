@@ -1,18 +1,35 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { NextSeo } from 'next-seo'
+import axios from 'axios'
 
 import Custom404 from '../../pages/404'
 import RecipeBtn from '../../components/menu/recipe-button'
 
-import Categories from '../../data/categories.json'
-
-const RecipeCategoryDetail = ({ cname, categoryExists }) => {
-    if (!categoryExists) {
-        return <Custom404 />
-    }
-
+const RecipeCategoryDetail = ({ cname }) => {
     if (!cname) {
         return null
+    }
+
+    const [categories, setCategories] = useState()
+
+    useEffect(() => {
+        axios.get('/api/categories')
+        .then(response => {
+            setCategories(response.data)
+        })
+        .catch(error => {
+            console.log('RecipeCategoryDetail error', error)
+        })
+    }, [])
+
+    if (!categories) {
+        return null
+    }
+
+    const categoryExists = Object.keys(categories).includes(cname)
+
+    if (!categoryExists) {
+        return <Custom404 />
     }
 
     return (
@@ -23,7 +40,7 @@ const RecipeCategoryDetail = ({ cname, categoryExists }) => {
 
             <h1 className='menu-title' >{cname}</h1>
 
-            {Categories[cname].recipeTitles.map(recipeTitle => {
+            {categories[cname].recipeTitles.map(recipeTitle => {
                 return (
                     <RecipeBtn key={recipeTitle} name={recipeTitle} />
                 )
@@ -34,12 +51,8 @@ const RecipeCategoryDetail = ({ cname, categoryExists }) => {
 
 RecipeCategoryDetail.getInitialProps = async ({ query }) => {
     const { cname } = query
-    const categoryExists = Object.keys(Categories).includes(cname)
 
-    return {
-        cname,
-        categoryExists
-    }
+    return { cname }
 }
 
 export default RecipeCategoryDetail

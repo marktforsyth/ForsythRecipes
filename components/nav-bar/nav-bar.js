@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useAuth0 } from '@auth0/auth0-react'
+
+import LoginBtn from '../auth/login-btn'
+import LogoutBtn from '../auth/logout-btn'
 
 import SearchIcon from '../../public/images/nav-bar/search.svg'
 import HomeIcon from '../../public/images/nav-bar/home.svg'
@@ -8,6 +12,8 @@ import AddRecipeIcon from '../../public/images/nav-bar/add-recipe.svg'
 const NavBar = () => {
     const router = useRouter()
     const [searchbarValue, setSearchbarValue] = useState('')
+
+    const { isAuthenticated } = useAuth0()
 
     useEffect(() => {
         const handleRouteChange = () => {
@@ -42,7 +48,11 @@ const NavBar = () => {
                     <HomeIcon onClick={() => {
                         router.push('/')                                                                    
                     }} />
-                    <AddRecipeIcon />
+                    { isAuthenticated ? (
+                      <AddRecipeIcon onClick={() => {
+                        router.push('/create-recipe')
+                      }} />
+                    ) : null}
                 </div>
 
                 <div className='right-column'>
@@ -54,6 +64,11 @@ const NavBar = () => {
                         value={searchbarValue}
                         onChange={event => handleChange(event)}
                     />
+                    { isAuthenticated ? (
+                      <LogoutBtn/>
+                    ) : (
+                      <LoginBtn/>
+                    )}
                 </div>
             </div>
         </div>

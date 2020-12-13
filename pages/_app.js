@@ -14,6 +14,8 @@ import '../styles/menu/recipe-btn.css'
 import '../styles/recipe-detail.css'
 import '../styles/media-queries.css'
 
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
 
@@ -42,4 +44,18 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default MyApp
+import { Auth0Provider } from "@auth0/auth0-react";
+
+const AppWrapper = ({ Component, pageProps }) => {
+  return (
+    <Auth0Provider
+      domain="marktf.us.auth0.com"
+      clientId="PP1VCCJKI6qTbp46COupWKAtNV2czxcN"
+      redirectUri="https://freshipes.shadowfire168.repl.co/"
+    >
+      <MyApp Component={Component} pageProps={pageProps} />
+    </Auth0Provider>
+  )
+}
+
+export default AppWrapper

@@ -20,12 +20,13 @@ const CreateRecipe = () => {
   }
 
   const [title, setTitle] = useState()
-
+  const [body, setBody] = useState()
 
   const submitForm = (event) => {
     event.preventDefault()
     
-    
+    console.log(title)
+    console.log(body)
   }
 
   return (
@@ -35,11 +36,14 @@ const CreateRecipe = () => {
         <h2>Recipe Title:</h2>
         <input
           placeholder='Title...'
-          onChange={(event) => console.log(event.target.innerText)}
+          onChange={(event) => setTitle(event.target.value)}
         ></input>
 
         <h2>Recipe Content:</h2>
-        <EditorNoSSR />
+        <textarea
+          placeholder='Recipe Content...'
+          onChange={(event) => setBody(event.target.value)}
+        ></textarea>
 
         <button type='submit'>Submit</button>
       </form>

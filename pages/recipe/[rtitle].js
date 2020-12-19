@@ -35,9 +35,13 @@ const RecipeDetail = ({ rtitle }) => {
     const profilePicture = '/images/profile-pictures/no-img-provided.png'
 
     const formatDate = (date) => {
-        return moment(
-            date.toString()
-        ).format('MMMM Do, YYYY')
+        if (date) {
+          return moment(
+              date.toString()
+          ).format('MMMM Do, YYYY')
+        } else {
+          return 'Undated'
+        }
     }
 
     const displayDatesContainer = () => {

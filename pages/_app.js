@@ -51,7 +51,7 @@ const AppWrapper = ({ Component, pageProps }) => {
     <Auth0Provider
       domain="marktf.us.auth0.com"
       clientId="PP1VCCJKI6qTbp46COupWKAtNV2czxcN"
-      redirectUri="https://freshipes.shadowfire168.repl.co/"
+      redirectUri="https://frecipes.herokuapp.com/"
     >
       <MyApp Component={Component} pageProps={pageProps} />
     </Auth0Provider>

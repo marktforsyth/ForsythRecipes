@@ -16,6 +16,7 @@ const RecipeDetail = ({ rtitle }) => {
         axios.get('/api/recipes')
         .then(response => {
             setRecipes(response.data)
+            console.log('recipes', response)
         })
         .catch(error => {
             console.log('recipe/[rtitle]-get recipes error', error)

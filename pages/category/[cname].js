@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextSeo } from 'next-seo'
 import axios from 'axios'
 
@@ -14,12 +14,12 @@ const RecipeCategoryDetail = ({ cname }) => {
 
     useEffect(() => {
         axios.get('/api/categories')
-        .then(response => {
-            setCategories(response.data)
-        })
-        .catch(error => {
-            console.log('RecipeCategoryDetail error', error)
-        })
+            .then(response => {
+                setCategories(response.data)
+            })
+            .catch(error => {
+                console.log('RecipeCategoryDetail error', error)
+            })
     }, [])
 
     if (!categories) {

@@ -16,27 +16,27 @@ const SearchResults = () => {
 
     useEffect(() => {
         axios.get('/api/recipes')
-        .then(response => {
-            setRecipes(response.data)
-        })
-        .catch(error => {
-            console.log('SearchResults error', error)
-        })
+            .then(response => {
+                setRecipes(response.data)
+            })
+            .catch(error => {
+                console.log('SearchResults error', error)
+            })
 
         axios.get('/api/categories')
-        .then(response => {
-            setCategories(response.data)
-        })
-        .catch(error => {
-            console.log('SearchResults error', error)
-        })
+            .then(response => {
+                setCategories(response.data)
+            })
+            .catch(error => {
+                console.log('SearchResults error', error)
+            })
 
         const handleRouteChange = () => {
             query = router.query
         }
 
         router.events.on('routeChangeComplete', handleRouteChange)
-        
+
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange)
         }
@@ -55,7 +55,7 @@ const SearchResults = () => {
             <NextSeo
                 title={'Search results: ' + query + ' - Forsyth Recipes'}
             />
-            
+
             <div className='result-heading-container'>
                 <h2 className='result-heading'>
                     <i>Showing results for</i> <span className='search-query'>{query}</span>

@@ -14,7 +14,7 @@ const Error = ({ statusCode }) => {
     return (
         <div className='error-container'>
             {chooseErrorMessage()}
-            
+
             <ErrorReturnHomeLink />
         </div>
     )

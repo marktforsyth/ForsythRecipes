@@ -22,14 +22,14 @@ const NavBar = () => {
         }
 
         router.events.on('routeChangeComplete', handleRouteChange)
-        
+
         return () => {
             router.events.off('routeChangeComplete', handleRouteChange)
         }
     }, [])
 
     const checkForSubmit = (event) => {
-        if (event.key === 'Enter' && event.target.value !== '') {            
+        if (event.key === 'Enter' && event.target.value !== '') {
             router.push({
                 pathname: '/search',
                 query: { q: event.target.value },
@@ -46,29 +46,32 @@ const NavBar = () => {
             <div className='nav-bar'>
                 <div className='left-column'>
                     <HomeIcon onClick={() => {
-                        router.push('/')                                                                    
+                        router.push('/')
                     }} />
-                    { isAuthenticated ? (
-                      <AddRecipeIcon onClick={() => {
-                        router.push('/create-recipe')
-                      }} />
+                    {isAuthenticated ? (
+                        <AddRecipeIcon onClick={() => {
+                            router.push('/create-recipe')
+                        }} />
                     ) : null}
                 </div>
 
                 <div className='right-column'>
-                    <SearchIcon />
-                    <input
-                        type='text'
-                        placeholder='Search recipes...'
-                        onKeyDown={event => checkForSubmit(event)}
-                        value={searchbarValue}
-                        onChange={event => handleChange(event)}
-                    />
-                    { isAuthenticated ? (
-                      <LogoutBtn/>
+                    <div className='search'>
+                        <SearchIcon />
+                        <input
+                            type='text'
+                            placeholder='Search recipes...'
+                            onKeyDown={event => checkForSubmit(event)}
+                            value={searchbarValue}
+                            onChange={event => handleChange(event)}
+                        />
+                    </div>
+
+                    {isAuthenticated ? (
+                        <LogoutBtn />
                     ) : (
-                      <LoginBtn/>
-                    )}
+                            <LoginBtn />
+                        )}
                 </div>
             </div>
         </div>

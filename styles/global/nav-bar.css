@@ -11,6 +11,7 @@
     left: 0;
     right: 0;
     background-color: white;
+    z-index: 2;
 }
 
 .nav-bar-container > .nav-bar {
@@ -23,25 +24,32 @@
 /* Right column styles */
 .nav-bar-container > .nav-bar > .right-column {
     width: 55%;
-    border-bottom: 2px solid black;
     display: flex;
     align-items: center;
-    padding-bottom: 6px;
+    justify-content: space-between;
 }
 
-.nav-bar-container > .nav-bar > .right-column input {
+.nav-bar-container > .nav-bar > .right-column > .search {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid black;
+    padding-bottom: 6px;
+    width: 80%;
+}
+
+.nav-bar-container > .nav-bar > .right-column > .search input {
     font-family: 'Antic Slab', serif;
     font-size: 2rem;
     border: none;
     width: 100%;
 }
 
-.nav-bar-container > .nav-bar > .right-column input:focus,
-.nav-bar-container > .nav-bar > .right-column input:active {
+.nav-bar-container > .nav-bar > .right-column > .search input:focus,
+.nav-bar-container > .nav-bar > .right-column > .search input:active {
     outline: none;
 }
 
-.nav-bar-container > .nav-bar > .right-column svg {
+.nav-bar-container > .nav-bar > .right-column > .search svg {
     margin-right: 12px;
 }
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
 import RecipeCategoryBtn from './recipe-category-button'
@@ -8,12 +8,12 @@ const MainMenu = () => {
 
     useEffect(() => {
         axios.get('/api/categories')
-        .then(response => {
-            setCategories(response.data)
-        })
-        .catch(error => {
-            console.log('MainMenu error', error)
-        })
+            .then(response => {
+                setCategories(response.data)
+            })
+            .catch(error => {
+                console.log('MainMenu error', error)
+            })
     }, [])
 
     if (!categories) {
@@ -22,7 +22,7 @@ const MainMenu = () => {
 
     const categoryNames = Object.keys(categories)
 
-    return(
+    return (
         <div>
             <h1 className='menu-title' >Main Categories</h1>
 

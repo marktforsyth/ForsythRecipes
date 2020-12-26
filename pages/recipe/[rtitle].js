@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextSeo } from 'next-seo'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import axios from 'axios'
 
-import Custom404 from '../../pages/404'
+import Custom404 from '../404'
+import RecipeForm from '../../components/recipe-form'
 
 const RecipeDetail = ({ rtitle }) => {
     if (!rtitle) {
@@ -11,16 +12,17 @@ const RecipeDetail = ({ rtitle }) => {
     }
 
     const [recipes, setRecipes] = useState()
+    const [editMode, setEditMode] = useState(false)
 
     useEffect(() => {
         axios.get('/api/recipes')
-        .then(response => {
-            setRecipes(response.data)
-            console.log('recipes', response)
-        })
-        .catch(error => {
-            console.log('recipe/[rtitle]-get recipes error', error)
-        })
+            .then(response => {
+                setRecipes(response.data)
+                console.log('recipes', response)
+            })
+            .catch(error => {
+                console.log('recipe/[rtitle]-get recipes error', error)
+            })
     }, [])
 
     if (!recipes) {
@@ -37,11 +39,11 @@ const RecipeDetail = ({ rtitle }) => {
 
     const formatDate = (date) => {
         if (date) {
-          return moment(
-              date.toString()
-          ).format('MMMM Do, YYYY')
+            return dayjs(
+                date.toString()
+            ).format('MMMM DD, YYYY')
         } else {
-          return 'Undated'
+            return 'Undated (error - tell Mark about this)'
         }
     }
 
@@ -69,7 +71,18 @@ const RecipeDetail = ({ rtitle }) => {
         }
     }
 
-    return(
+    if (editMode) {
+        return <RecipeForm
+                    predefTitle={rtitle}
+                    predefBody={
+                        recipes[rtitle].body.includes('<p>')
+                            ? recipes[rtitle.body]
+                            : '<p>' + recipes[rtitle].body + '</p>'
+                    }
+                />
+    }
+
+    return (
         <div>
             <NextSeo
                 title={rtitle + ' - Forsyth Recipes'}
@@ -86,6 +99,11 @@ const RecipeDetail = ({ rtitle }) => {
                     </div>
                 </div>
             </div>
+
+            <button
+                class='edit-btn'
+                onClick={() => setEditMode(true)}
+            >Edit</button>
 
             <pre>{recipes[rtitle].body}</pre>
         </div>

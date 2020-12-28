@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo'
 import dayjs from 'dayjs'
 import axios from 'axios'
 import { useAuth0 } from '@auth0/auth0-react'
+import { useRouter } from 'next/router'
 
 import Custom404 from '../404'
 import RecipeForm from '../../components/recipe-form'
@@ -14,17 +15,23 @@ const RecipeDetail = ({ rtitle }) => {
 
     const [recipes, setRecipes] = useState()
     const [editMode, setEditMode] = useState(false)
+    const [recipeDeleted, setRecipeDeleted] = useState(false)
 
-    const { isAuthenticated } = useAuth0()
+    const { isAuthenticated, loginWithRedirect } = useAuth0()
+    const router = useRouter()
+
+    const loadRecipes = () => {
+        axios.get('/api/recipes')
+        .then(response => {
+            setRecipes(response.data)
+        })
+        .catch(error => {
+            console.log('recipe/[rtitle]-get recipes error', error)
+        })
+    }
 
     useEffect(() => {
-        axios.get('/api/recipes')
-            .then(response => {
-                setRecipes(response.data)
-            })
-            .catch(error => {
-                console.log('recipe/[rtitle]-get recipes error', error)
-            })
+        loadRecipes()
     }, [])
 
     if (!recipes) {
@@ -38,6 +45,29 @@ const RecipeDetail = ({ rtitle }) => {
     }
 
     const profilePicture = '/images/profile-pictures/no-img-provided.png'
+
+    const deleteRecipe = () => {
+        if (!isAuthenticated) {
+            loginWithRedirect()
+
+            return <p>Trying to login...</p>
+        }
+
+        const recipeTrulyDeleted = confirm('Are you sure you want to delete this recipe?')
+        if (recipeTrulyDeleted) {
+            axios.delete('/api/recipes', {
+                params: { title: rtitle }
+            })
+            .then(response => console.log(response))
+            .catch(error => console.log('rtitle deleteRecipe error: ', error))
+
+            setRecipeDeleted(true)
+        }
+    }
+
+    if (recipeDeleted) {
+        router.push('/')
+    }
 
     const formatDate = (date) => {
         if (date) {
@@ -76,7 +106,9 @@ const RecipeDetail = ({ rtitle }) => {
     if (editMode) {
         return <RecipeForm
                     predefTitle={rtitle}
-                    predefBody={'<p>' + recipes[rtitle].body + '</p>'}
+                    predefBody={recipes[rtitle].body}
+                    setEditMode={() => setEditMode()}
+                    loadRecipes={() => loadRecipes()}
                 />
     }
 
@@ -97,11 +129,18 @@ const RecipeDetail = ({ rtitle }) => {
                     </div>
                 </div>
             </div>
+
             { isAuthenticated ? (
-                <button
-                    className='edit-btn'
-                    onClick={() => setEditMode(true)}
-                >Edit</button>
+                <div className='recipe-action-btn-container'>
+                    <button
+                        className='edit-btn'
+                        onClick={() => setEditMode(true)}
+                    >Edit</button>
+                    <button
+                        className='delete-btn'
+                        onClick={() => deleteRecipe()}
+                    >Delete</button>
+                </div>
             ) : null }
 
             <div className='recipe-body-container' dangerouslySetInnerHTML={{__html: recipes[rtitle].body}}></div>

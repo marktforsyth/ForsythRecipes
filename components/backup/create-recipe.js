@@ -25,7 +25,6 @@ const CreateRecipe = () => {
 
   const [title, setTitle] = useState()
   const [body, setBody] = useState()
-  // const [editorState, setEditorState] = useState(EditorState.createEmpty())
   const editorState = EditorState.createEmpty()
 
   const submitForm = (event) => {

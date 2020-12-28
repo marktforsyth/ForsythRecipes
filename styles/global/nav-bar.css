@@ -53,6 +53,23 @@
     margin-right: 12px;
 }
 
+.nav-bar-container > .nav-bar > .right-column button {
+    border: 1px solid black;
+    padding: 10px;
+    transition: 0.4s ease-in-out;
+    font-size: 0.9em;
+}
+
+.nav-bar-container > .nav-bar > .right-column button:hover {
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    border: 1px solid transparent;
+    background-color: rgb(27, 27, 27);
+    color: rgb(241, 241, 241);
+    font-weight: 500;
+}
+
 /* Left column styles */
 .nav-bar-container > .nav-bar > .left-column {
     display: grid;

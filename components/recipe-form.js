@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Editor } from '@tinymce/tinymce-react'
 import dayjs from 'dayjs'
@@ -19,27 +19,68 @@ const RecipeForm = (props) => {
     const [body, setBody] = useState(
         props.predefBody ? props.predefBody : ''
     )
+    const [safeToLeavePage, setSafeToLeavePage] = useState(false)
+    // const [notActuallyRedirecting, setNotActuallyRedirecting] = useState(false)
 
     const router = useRouter()
 
     const submitForm = (event) => {
         event.preventDefault()
+        setSafeToLeavePage(true)
 
-        axios.post('/api/recipes', {
-          title,
-          body,
-          creator: user.name,
-          created: dayjs().format('YYYYMMDD')
-        })
+        if (props.setEditMode) {
+            axios.patch('/api/recipes', {
+                title,
+                body,
+                modified: dayjs().format('YYYYMMDD')
+            })
+            .then(response => console.log(response))
+            .catch(error => console.log('recipe-form if (editmode) error: ', error))
 
-        // console.log('Title: ', title)
-        // console.log('Body: ', body)
-        // setTitle('')
-        // setBody('')
+            props.setEditMode(false)
+            props.loadRecipes()
+        } else {
+            axios.post('/api/recipes', {
+                title,
+                body,
+                creator: user.name,
+                created: dayjs().format('YYYYMMDD')
+            })
+            .then(response => console.log(response))
+            .catch(error => console.log('recipe-form if (editmode) error: ', error))
 
-        router.push(`/recipe/${encodeURIComponent(title)}`)
-        // TODO use router.push instead to simply go to new recipe
+            router.push(`/recipe/${encodeURIComponent(title)}`)
+        }
     }
+
+    // useEffect(() => {
+    //     // router.beforePopState(({ url, as, options}) => {
+    //     //     if (!safeToLeavePage && as !== router.asPath) {
+    //     //         // window.location.href = as
+    //     //         if (!confirm('Are you sure you want to leave the page? Changes you made will not be saved.')) {
+    //     //             window.location.href = as
+    //     //             return false
+    //     //         }
+    //     //     }
+
+    //     //     return true
+    //     // })
+
+    //     const handleRouteChange = (url) => {
+    //         if (!safeToLeavePage && url !== router.asPath) {
+    //             if (!confirm('Are you sure you want to leave the page? Changes you made will not be saved.')) {
+    //                 // router.push(router.asPath)
+    //                 // setNotActuallyRedirecting(false)
+    //             }
+    //         }
+    //     }
+
+    //     router.events.on('routeChangeStart', handleRouteChange)
+
+    //     return () => {
+    //         router.events.off('routeChangeStart', handleRouteChange)
+    //     }
+    // }, [])
 
     return (
         <form className={'recipe-form'} onSubmit={(event) => submitForm(event)}>

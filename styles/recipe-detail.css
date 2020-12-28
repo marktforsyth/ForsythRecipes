@@ -11,6 +11,10 @@
     letter-spacing: 1px;
 }
 
+p {
+    margin: 0;
+}
+
 h1 {
     font-size: 2.4em;
     margin-bottom: 0px;
@@ -67,4 +71,40 @@ h1 {
     margin-left: 15px;
     font-weight: bold;
     font-family: "Antic Slab", serif;
+}
+
+/* Styles for the actions buttons like edit/delete */
+.recipe-action-btn-container {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 150px;
+    margin-left: 10px;
+}
+
+.recipe-action-btn-container button {
+    border: 1px solid black;
+    padding: 10px;
+    transition: 0.4s ease-in-out;
+    width: 70px;
+}
+
+.recipe-action-btn-container button:hover {
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.19);
+    border: 1px solid transparent;
+    color: rgb(241, 241, 241);
+    font-weight: 500;
+}
+
+.recipe-action-btn-container > .edit-btn:hover {
+    background-color: rgb(8, 99, 0);
+}
+
+.recipe-action-btn-container > .delete-btn:hover {
+    background-color: rgb(196, 0, 0);
 }

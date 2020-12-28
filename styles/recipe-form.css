@@ -23,10 +23,8 @@
 .recipe-form > button {
     margin-top: 30px;
     padding: 15px;
-    padding-left: 30px;
-    padding-right: 30px;
-    /* font-family: 'EB Garamond', serif; */
-    /* font-weight: bold; */
+    /* padding-left: 30px;
+    padding-right: 30px; */
     font-family: inherit;
     border: 1px solid black;
     font-size: 1.5em;

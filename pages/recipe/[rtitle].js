@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NextSeo } from 'next-seo'
 import dayjs from 'dayjs'
 import axios from 'axios'
+import { useAuth0 } from '@auth0/auth0-react'
 
 import Custom404 from '../404'
 import RecipeForm from '../../components/recipe-form'
@@ -14,11 +15,12 @@ const RecipeDetail = ({ rtitle }) => {
     const [recipes, setRecipes] = useState()
     const [editMode, setEditMode] = useState(false)
 
+    const { isAuthenticated } = useAuth0()
+
     useEffect(() => {
         axios.get('/api/recipes')
             .then(response => {
                 setRecipes(response.data)
-                console.log('recipes', response)
             })
             .catch(error => {
                 console.log('recipe/[rtitle]-get recipes error', error)
@@ -74,11 +76,7 @@ const RecipeDetail = ({ rtitle }) => {
     if (editMode) {
         return <RecipeForm
                     predefTitle={rtitle}
-                    predefBody={
-                        recipes[rtitle].body.includes('<p>')
-                            ? recipes[rtitle.body]
-                            : '<p>' + recipes[rtitle].body + '</p>'
-                    }
+                    predefBody={'<p>' + recipes[rtitle].body + '</p>'}
                 />
     }
 
@@ -99,13 +97,14 @@ const RecipeDetail = ({ rtitle }) => {
                     </div>
                 </div>
             </div>
+            { isAuthenticated ? (
+                <button
+                    className='edit-btn'
+                    onClick={() => setEditMode(true)}
+                >Edit</button>
+            ) : null }
 
-            <button
-                class='edit-btn'
-                onClick={() => setEditMode(true)}
-            >Edit</button>
-
-            <pre>{recipes[rtitle].body}</pre>
+            <div className='recipe-body-container' dangerouslySetInnerHTML={{__html: recipes[rtitle].body}}></div>
         </div>
     )
 }

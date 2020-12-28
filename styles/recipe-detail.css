@@ -1,5 +1,5 @@
 /* Element styles */
-pre {
+.recipe-body-container {
     font-family: inherit;
     overflow-x: auto;
     white-space: pre-wrap;
@@ -7,7 +7,7 @@ pre {
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
-    line-height: 1.5;
+    line-height: 2;
     letter-spacing: 1px;
 }
 
